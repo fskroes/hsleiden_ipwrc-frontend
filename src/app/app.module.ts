@@ -7,6 +7,9 @@ import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { RouterModule} from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -15,10 +18,19 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
     HomeComponent,
     ProductsComponent,
     ShoppingCartComponent,
-    AdminProductsComponent
+    AdminProductsComponent,
+    LoginComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgbModule.forRoot(),
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent },
+      { path: 'products', component: ProductsComponent},
+      { path: 'shopping-cart', component: ShoppingCartComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'admin/products', component: AdminProductsComponent },
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
