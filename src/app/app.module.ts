@@ -10,6 +10,8 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { RouterModule} from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './category.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ProductsComponent,
     ShoppingCartComponent,
     AdminProductsComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +33,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       { path: 'shopping-cart', component: ShoppingCartComponent },
       { path: 'login', component: LoginComponent },
       { path: 'admin/products', component: AdminProductsComponent },
+      { path: 'admin/products/new', component: ProductFormComponent },
     ])
   ],
-  providers: [],
+  providers: [
+    CategoryService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
