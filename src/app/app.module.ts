@@ -12,6 +12,12 @@ import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './category.service';
+import {ApiService} from './shared/services/api.service';
+import {AuthorizationService} from './shared/services/authorization.service';
+import {EmployeeService} from './shared/services/employee.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +32,9 @@ import { CategoryService } from './category.service';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
@@ -37,7 +46,10 @@ import { CategoryService } from './category.service';
     ])
   ],
   providers: [
-    CategoryService
+    CategoryService,
+    ApiService,
+    AuthorizationService,
+    EmployeeService
   ],
   bootstrap: [AppComponent]
 })
