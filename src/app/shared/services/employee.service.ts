@@ -13,15 +13,28 @@ export class EmployeeService {
 
   }
 
-  public signin(user: EmployeeModel, remember: boolean): void {
-    this.authService.setAuthorization(user.email, user.password);
+  public signin(model: EmployeeModel, remember: boolean) {
+    this.authService.setAuthorization(model.email, model.password);
+
+    // this.api
+    //   .get('product/products')
+    //   .subscribe(r => console.log(r));
+
 
     this.api.get('employee/login')
       .subscribe(auth => {
-        this.authService.storeAuthorization(auth, remember);
+        // this.authService.storeAuthorization(auth, remember);
+        console.log(auth)
         console.log('HOI!,');
+
+
+
 
         this.router.navigate(['']);
       }, () => 'Sign In failed');
+  }
+
+  public signout() {
+    this.authService.deleteAuthorization();
   }
 }

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {AuthorizationService} from './authorization.service';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ApiService {
@@ -40,11 +41,12 @@ export class ApiService {
     return headers;
   }
 
-  public get<T>(path: string, queryParameters?: Object): Observable<T> {
+  public get(path: string, queryParameters?: Object) {
     const uri = this.createURI(path, queryParameters);
     const headers = this.createRequestHeaders();
 
-    return this.http.get<T>(uri, { headers: headers });
+    return this.http.get(uri, { headers: headers })
+      .map(r => console.log(r));
   }
 
   public post<T>(path: string, data: Object, queryParameters?: Object): Observable<T> {
