@@ -18,7 +18,12 @@ export class LoginComponent {
   ) {
     if (this.authService.hasAuthorization()) {
       console.log('user is already sing in');
-      console.log(this.authService.getAuthenticator());
+      this.employee = this.authService.getAuthenticator();
+      console.log(
+        'name ' + this.employee.name +
+        ' email ' + this.employee.email +
+        ' role ' + this.employee.role
+      );
     }
   }
 

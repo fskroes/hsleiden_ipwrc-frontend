@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {EmployeeService} from '../shared/services/employee.service';
 import {EmployeeModel} from '../shared/models/employee.model';
+import {LoginComponent} from '../login/login.component';
+import {AuthorizationService} from '../shared/services/authorization.service';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'app-bs-navbar',
@@ -9,9 +12,13 @@ import {EmployeeModel} from '../shared/models/employee.model';
 })
 export class BsNavbarComponent {
 
-  employee?: EmployeeModel = new EmployeeModel();
+  employee: Subject<boolean>;
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(
+    private employeeService: EmployeeService,
+    private authService: AuthorizationService) {
+    this.employee = this.authService.authorized$;
+  }
 
   logout() {
     this.employeeService.signout();

@@ -73,7 +73,7 @@ export class AuthorizationService {
     return 'Basic ' + btoa(this.login + ':' + this.password);
   }
 
-  public getAuthenticator(): Object {
+  public getAuthenticator(): EmployeeModel {
     return this.authenticator;
   }
 

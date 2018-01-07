@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
@@ -11,13 +11,13 @@ import { RouterModule} from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
-import { CategoryService } from './category.service';
 import {ApiService} from './shared/services/api.service';
 import {AuthorizationService} from './shared/services/authorization.service';
 import {EmployeeService} from './shared/services/employee.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
+import {ProductService} from './shared/services/product.service';
+import {AppErrorHandler} from './common/app-error-handler';
 
 @NgModule({
   declarations: [
@@ -46,10 +46,11 @@ import {HttpClientModule} from '@angular/common/http';
     ])
   ],
   providers: [
-    CategoryService,
     ApiService,
     AuthorizationService,
-    EmployeeService
+    EmployeeService,
+    ProductService,
+    { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]
 })

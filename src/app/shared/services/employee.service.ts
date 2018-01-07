@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AuthorizationService} from './authorization.service';
 import {ApiService} from './api.service';
 import {EmployeeModel} from '../models/employee.model';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class EmployeeService {
@@ -16,22 +17,16 @@ export class EmployeeService {
   public signin(model: EmployeeModel, remember: boolean) {
     this.authService.setAuthorization(model.email, model.password);
 
-    // this.api
-    //   .get('product/products')
-    //   .subscribe(r => console.log(r));
+    this.api
+      .get('employee/login')
+      .subscribe(response => {
+        const r = response as EmployeeModel;
+        console.log(JSON.stringify(r));
 
-
-    this.api.get('employee/login')
-      .subscribe(auth => {
-        // this.authService.storeAuthorization(auth, remember);
-        console.log(auth)
-        console.log('HOI!,');
-
-
-
+        this.authService.storeAuthorization(response, remember);
 
         this.router.navigate(['']);
-      }, () => 'Sign In failed');
+      });
   }
 
   public signout() {
