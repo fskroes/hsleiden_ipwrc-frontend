@@ -43,8 +43,9 @@ import { CustomFormsModule } from 'ng2-validation'
       { path: 'products', component: ProductsComponent},
       { path: 'shopping-cart', component: ShoppingCartComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'admin/products', component: AdminProductsComponent },
       { path: 'admin/products/new', component: ProductFormComponent },
+      { path: 'admin/products/:id', component: ProductFormComponent },
+      { path: 'admin/products', component: AdminProductsComponent },
     ])
   ],
   providers: [
@@ -52,7 +53,7 @@ import { CustomFormsModule } from 'ng2-validation'
     AuthorizationService,
     EmployeeService,
     ProductService,
-    { provide: ErrorHandler, useClass: AppErrorHandler }
+    // { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]
 })

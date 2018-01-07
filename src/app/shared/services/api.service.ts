@@ -62,7 +62,7 @@ export class ApiService {
     const headers = this.createRequestHeaders();
 
     return this.http
-      .post(uri, data, { headers: headers })
+      .put(uri, data, { headers: headers })
       .catch(this.handleError);
   }
 
