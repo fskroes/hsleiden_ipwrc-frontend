@@ -18,6 +18,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {ProductService} from './shared/services/product.service';
 import {AppErrorHandler} from './common/app-error-handler';
+import { CustomFormsModule } from 'ng2-validation'
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {AppErrorHandler} from './common/app-error-handler';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    CustomFormsModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },

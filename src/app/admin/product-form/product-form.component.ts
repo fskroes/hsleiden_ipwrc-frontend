@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {ProductService} from '../../shared/services/product.service';
+import {Observable} from 'rxjs/Observable';
+import {ProductModel} from '../../shared/models/product.model';
 
 @Component({
   selector: 'app-product-form',
@@ -7,7 +9,7 @@ import {ProductService} from '../../shared/services/product.service';
   styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent {
-  products$;
+  products$: Observable<ProductModel>;
 
   constructor(private productService: ProductService) {
     this.products$ = productService.getProducts();
