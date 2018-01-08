@@ -20,9 +20,6 @@ export class EmployeeService {
     this.api
       .get('employee/login')
       .subscribe(response => {
-        const r = response as EmployeeModel;
-        console.log(JSON.stringify(r));
-
         this.authService.storeAuthorization(response, remember);
 
         this.router.navigate(['']);

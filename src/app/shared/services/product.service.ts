@@ -1,5 +1,5 @@
 import {ApiService} from './api.service';
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ProductModel} from '../models/product.model';
 
 @Injectable()
@@ -16,10 +16,8 @@ export class ProductService {
 
   createProduct(product: ProductModel) {
     this.api
-      .post<void>('product/new', product)
-      .subscribe(response => console.log('response' + response), error2 => {
-        console.log(error2);
-      });
+      .post('product/new', product)
+      .subscribe(response => console.log('response' + response));
   }
 
   getProduct(productid) {
@@ -31,6 +29,10 @@ export class ProductService {
     return this.api
       .put('product/edit/' + <string>productid, product)
       .subscribe(r => console.log(r));
+  }
 
+  deleteProduct(productid) {
+    return this.api.delete('product/delete/' + <string>productid)
+      .subscribe(r => console.log(r));
   }
 }

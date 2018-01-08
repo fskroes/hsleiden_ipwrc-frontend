@@ -4,6 +4,8 @@ import {EmployeeModel} from '../shared/models/employee.model';
 import {LoginComponent} from '../login/login.component';
 import {AuthorizationService} from '../shared/services/authorization.service';
 import {Subject} from 'rxjs/Subject';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-bs-navbar',
@@ -12,15 +14,21 @@ import {Subject} from 'rxjs/Subject';
 })
 export class BsNavbarComponent {
 
-  employee: Subject<boolean>;
+  employee$: EmployeeModel;
 
   constructor(
     private employeeService: EmployeeService,
-    private authService: AuthorizationService) {
-    this.employee = this.authService.authorized$;
+    private authService: AuthorizationService,
+    private router: Router) {
+    this
+        .authService
+        .authorized$
+        .subscribe(emp => this.employee$ = emp);
+    console.log('employeemodel in bs-navbar' + this.employee$);
   }
 
   logout() {
     this.employeeService.signout();
+    this.router.navigate(['']);
   }
 }

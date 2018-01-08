@@ -18,7 +18,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {ProductService} from './shared/services/product.service';
 import {AppErrorHandler} from './common/app-error-handler';
-import { CustomFormsModule } from 'ng2-validation'
+import { CustomFormsModule } from 'ng2-validation';
+import { DataTableModule } from 'angular-4-data-table';
 
 @NgModule({
   declarations: [
@@ -37,9 +38,10 @@ import { CustomFormsModule } from 'ng2-validation'
     HttpClientModule,
     ReactiveFormsModule,
     CustomFormsModule,
+    DataTableModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
+      { path: '', component: ProductsComponent },
       { path: 'products', component: ProductsComponent},
       { path: 'shopping-cart', component: ShoppingCartComponent },
       { path: 'login', component: LoginComponent },
