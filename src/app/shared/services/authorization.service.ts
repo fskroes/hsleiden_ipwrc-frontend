@@ -9,6 +9,7 @@ export class AuthorizationService {
   private authenticator: EmployeeModel = null;
 
   public authorized$ = new Subject<boolean>();
+  public authorizedModel$ = new Subject<EmployeeModel>();
 
   constructor() {
     this.restoreAuthorization();
@@ -16,26 +17,31 @@ export class AuthorizationService {
 
   public hasAuthorization(): boolean {
     return this.login !== null && this.password !== null;
+    // return this.authenticator !== null;
   }
 
   public setAuthorization(email: string, password: string): void {
     this.login = email;
     this.password = password;
+    // this.authenticator.email = email;
+    // this.authenticator.password = password;
   }
 
   public storeAuthorization(authenticator: EmployeeModel, local: boolean) {
     this.authenticator = authenticator;
 
-    const authorization = {
-      login: this.login,
-      password: this.password,
-      authenticator: this.authenticator
-    };
+    // const authorization = {
+    //   login: this.login,
+    //   password: this.password,
+    //   authenticator: this.authenticator
+    // };
 
-    const authorizationString = JSON.stringify(authorization);
+    const authorizationString = JSON.stringify(this.authenticator);
     const storage = local ? localStorage : sessionStorage;
 
     storage.setItem('authorization', authorizationString);
+
+    console.log('store auth ' + storage.getItem('authorization'));
 
     this.authorized$.next(true);
   }
@@ -49,18 +55,25 @@ export class AuthorizationService {
 
     if (authorizationString !== null) {
       const authorization = JSON.parse(authorizationString);
+      const newAuthorization: EmployeeModel = JSON.parse(authorizationString);
 
       this.login = authorization['login'];
       this.password = authorization['password'];
-      this.authenticator = authorization['authenticator'];
+      // this.authenticator = authorization['authenticator'];
+
+      console.log('authorization from JSON parse ' + authorization);
+
+      this.authenticator = newAuthorization;
+
+      console.log('authorization from new object ' + this.authenticator);
 
       this.authorized$.next(true);
     }
   }
 
   public deleteAuthorization(): void {
-    this.login = null;
-    this.password = null;
+    // this.login = null;
+    // this.password = null;
     this.authenticator = null;
 
     sessionStorage.removeItem('authorization');
@@ -74,6 +87,7 @@ export class AuthorizationService {
   }
 
   public getAuthenticator(): EmployeeModel {
+    this.restoreAuthorization();
     return this.authenticator;
   }
 

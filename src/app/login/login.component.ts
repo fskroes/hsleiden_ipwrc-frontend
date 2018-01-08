@@ -19,16 +19,15 @@ export class LoginComponent {
     if (this.authService.hasAuthorization()) {
       console.log('user is already sing in');
       this.employee = this.authService.getAuthenticator();
-      console.log(
-        'name ' + this.employee.name +
-        ' email ' + this.employee.email +
-        ' role ' + this.employee.role
-      );
+      // console.log(
+      //   'name ' + this.employee.name +
+      //   ' email ' + this.employee.email +
+      //   ' role ' + this.employee.role
+      // );
     }
   }
 
   public signin() {
-    console.log(this.employee.email);
     this.employeeService.signin(this.employee, false);
   }
 }
