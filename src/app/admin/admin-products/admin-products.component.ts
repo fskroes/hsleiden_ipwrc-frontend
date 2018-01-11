@@ -25,7 +25,7 @@ export class AdminProductsComponent implements OnInit {
   }
 
   private initTable(products: ProductModel[]) {
-    this.tableResouce = new DataTableResource<ProductModel>(this.products);
+    this.tableResouce = new DataTableResource<ProductModel>(products);
     this.tableResouce.query({offset: 0})
       .then(items => this.items = items);
     this.tableResouce.count()

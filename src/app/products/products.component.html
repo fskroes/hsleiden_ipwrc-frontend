@@ -1,19 +1,9 @@
 <div class="row">
   <ng-container *ngFor="let p of products$ | async; let i = index">
-
     <div class="col">
-      <div
-        class="card" style="width: 18rem;">
-        <img class="card-img-top" [src]="p.imageurl">
-        <div class="card-body">
-          <h5 class="card-title">{{p.name}}</h5>
-          <p class="card-text">{{p.usd_value}}</p>
-          <a href="#" class="btn btn-primary">Add to cart</a>
-        </div>
-      </div>
+      <app-product-card [product]="p"></app-product-card>
     </div>
     <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
-
   </ng-container>
 </div>
 

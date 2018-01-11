@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {EmployeeModel} from '../models/employee.model';
+import {CartModel} from '../models/cart.model';
 
 @Injectable()
 export class AuthorizationService {
@@ -43,6 +44,7 @@ export class AuthorizationService {
 
     console.log('store auth ' + storage.getItem('authorization'));
 
+    this.authorizedModel$.next(this.authenticator);
     this.authorized$.next(true);
   }
 
@@ -67,6 +69,7 @@ export class AuthorizationService {
 
       console.log('authorization from new object ' + this.authenticator);
 
+      this.authorizedModel$.next(this.authenticator);
       this.authorized$.next(true);
     }
   }

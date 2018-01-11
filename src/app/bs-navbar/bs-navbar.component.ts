@@ -12,19 +12,19 @@ import {Observable} from 'rxjs/Observable';
   templateUrl: './bs-navbar.component.html',
   styleUrls: ['./bs-navbar.component.css']
 })
-export class BsNavbarComponent {
+export class BsNavbarComponent implements OnInit {
 
-  employee$: EmployeeModel;
+  employee: EmployeeModel = { };
 
   constructor(
     private employeeService: EmployeeService,
     private authService: AuthorizationService,
     private router: Router) {
-    this
-        .authService
-        .authorized$
-        .subscribe(emp => this.employee$ = emp);
-    console.log('employeemodel in bs-navbar' + this.employee$);
+    this.employee = this.authService.getAuthenticator();
+  }
+
+  ngOnInit(): void {
+    this.employee = this.authService.getAuthenticator();
   }
 
   logout() {

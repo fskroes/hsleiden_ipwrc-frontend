@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ProductService} from '../shared/services/product.service';
 import {Observable} from 'rxjs/Observable';
 import {ProductModel} from '../shared/models/product.model';
+import {CartService} from '../shared/services/cart.service';
+import {CartModel} from '../shared/models/cart.model';
 
 @Component({
   selector: 'app-products',
@@ -12,8 +14,10 @@ export class ProductsComponent {
 
   products$: Observable<ProductModel>;
 
-  constructor(private productService: ProductService) {
+  @Input('show-actions') showActions = true;
+
+  constructor(
+    private productService: ProductService) {
     this.products$ = this.productService.getProducts();
   }
-
 }

@@ -20,6 +20,9 @@ import {ProductService} from './shared/services/product.service';
 import {AppErrorHandler} from './common/app-error-handler';
 import { CustomFormsModule } from 'ng2-validation';
 import { DataTableModule } from 'angular-4-data-table';
+import {CartService} from './shared/services/cart.service';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './products/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { DataTableModule } from 'angular-4-data-table';
     ShoppingCartComponent,
     AdminProductsComponent,
     LoginComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductFilterComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +60,7 @@ import { DataTableModule } from 'angular-4-data-table';
     AuthorizationService,
     EmployeeService,
     ProductService,
+    CartService
     // { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]
