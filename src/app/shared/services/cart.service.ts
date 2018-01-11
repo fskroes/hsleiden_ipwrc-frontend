@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {CartModel} from '../models/cart.model';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class CartService {
 
   private authenticatorCart: CartModel = null;
 
-  constructor() {
+  constructor(private router: Router) {
     // this.restoreAuthenticatorCart();
   }
 
@@ -41,4 +42,12 @@ export class CartService {
     // return this.authenticatorCart;
   }
 
+  deleteCart() {
+    this.authenticatorCart = null;
+
+    sessionStorage.removeItem('authorizationCart');
+    localStorage.removeItem('authorizationCart');
+
+    this.router.navigate(['']);
+  }
 }
