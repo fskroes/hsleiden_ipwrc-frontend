@@ -21,8 +21,9 @@ import {AppErrorHandler} from './common/app-error-handler';
 import { CustomFormsModule } from 'ng2-validation';
 import { DataTableModule } from 'angular-4-data-table';
 import {CartService} from './shared/services/cart.service';
-import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
+import {AuthGuard} from './shared/services/auth-guard.service';
+import {AdminAuthGuard} from './shared/services/admin-auth-guard';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,6 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
     AdminProductsComponent,
     LoginComponent,
     ProductFormComponent,
-    ProductFilterComponent,
     ProductCardComponent
   ],
   imports: [
@@ -50,9 +50,21 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
       { path: 'products', component: ProductsComponent},
       { path: 'shopping-cart', component: ShoppingCartComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'admin/products/new', component: ProductFormComponent },
-      { path: 'admin/products/:id', component: ProductFormComponent },
-      { path: 'admin/products', component: AdminProductsComponent },
+      {
+        path: 'admin/products/new',
+        component: ProductFormComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
+      {
+        path: 'admin/products/:id',
+        component: ProductFormComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
+      {
+        path: 'admin/products',
+        component: AdminProductsComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
     ])
   ],
   providers: [
@@ -60,8 +72,10 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
     AuthorizationService,
     EmployeeService,
     ProductService,
-    CartService
-    // { provide: ErrorHandler, useClass: AppErrorHandler }
+    CartService,
+    AuthGuard,
+    AdminAuthGuard,
+    { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]
 })

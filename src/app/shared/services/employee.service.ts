@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthorizationService} from './authorization.service';
 import {ApiService} from './api.service';
 import {EmployeeModel} from '../models/employee.model';
@@ -10,7 +10,8 @@ export class EmployeeService {
 
   constructor(private api: ApiService,
               private authService: AuthorizationService,
-              private router: Router) {
+              private router: Router,
+              private route: ActivatedRoute) {
 
   }
 
@@ -22,7 +23,8 @@ export class EmployeeService {
       .subscribe(response => {
         this.authService.storeAuthorization(response, remember);
 
-        this.router.navigate(['']);
+        let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+        this.router.navigate([returnUrl || '/']);
       });
   }
 

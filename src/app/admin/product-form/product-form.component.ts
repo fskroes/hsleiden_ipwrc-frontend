@@ -13,7 +13,7 @@ import 'rxjs/operator/take';
 export class ProductFormComponent {
 
   products$: Observable<ProductModel>;
-  product = {};
+  product: ProductModel;
   id;
 
   constructor(

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {EmployeeModel} from '../shared/models/employee.model';
 import {EmployeeService} from '../shared/services/employee.service';
 import {AuthorizationService} from '../shared/services/authorization.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,16 +15,11 @@ export class LoginComponent {
 
   constructor(
     private employeeService: EmployeeService,
-    private authService: AuthorizationService
+    private authService: AuthorizationService,
   ) {
     if (this.authService.hasAuthorization()) {
       console.log('user is already sing in');
       this.employee = this.authService.getAuthenticator();
-      // console.log(
-      //   'name ' + this.employee.name +
-      //   ' email ' + this.employee.email +
-      //   ' role ' + this.employee.role
-      // );
     }
   }
 
